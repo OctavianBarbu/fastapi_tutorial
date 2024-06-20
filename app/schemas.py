@@ -10,8 +10,8 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     id: int
-    email: EmailStr
-    created_at: datetime
+    username: str
+    phone_number: str
 
 class UserLogin(BaseModel):
     email: EmailStr
