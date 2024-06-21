@@ -16,6 +16,17 @@ def get_users(db: Session = Depends(get_db), current_user: int =
     users = db.query(models.User).all()
     return users
 
+@router.put("/", response_model=schemas.UserResponse)
+def update_user(user: schemas.UserUpdate, db: Session = Depends(get_db), current_user: int = 
+                 Depends(oath2.get_current_user)):
+    user_query = db.query(models.User).filter(models.User.id == current_user.id)
+    user_to_update = user_query.first()
+    user_to_update.phone_number = user.phone_number
+    user_to_update.username = user.username
+    db.commit()
+    db.refresh(user_to_update)
+
+    return user_to_update
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserResponse)

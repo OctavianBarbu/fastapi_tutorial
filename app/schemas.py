@@ -15,6 +15,10 @@ class UserResponse(BaseModel):
     username: str
     phone_number: Optional[str] = None
 
+class UserUpdate(BaseModel):
+    phone_number: Optional[str] = None
+    username: Optional[str] = "Unnamed"
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
