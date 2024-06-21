@@ -7,11 +7,13 @@ from typing import Optional
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
+    phone_number: Optional[str] = None
+    username: Optional[str] = "Unnamed"
 
 class UserResponse(BaseModel):
     id: int
     username: str
-    phone_number: str
+    phone_number: Optional[str] = None
 
 class UserLogin(BaseModel):
     email: EmailStr
